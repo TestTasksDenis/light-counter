@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { HeaderComponent } from '@components/header/header.component';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { TrafficLight } from '@domain/interfaces/traffic-light.interface';
@@ -20,6 +20,7 @@ import { TrafficService } from '@services/traffic/traffic.service';
 })
 export class LightTrafficComponent {
   readonly trafficService = inject(TrafficService);
+  traffic = input<string>();
 
   removeLight(): void {
     if (this.trafficService.currentTraffic()) {

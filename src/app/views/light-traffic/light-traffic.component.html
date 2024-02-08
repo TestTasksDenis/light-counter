@@ -1,0 +1,50 @@
+<section class="traffic">
+  <div class="traffic__header">
+    <light-header />
+  </div>
+  <div class="traffic__content">
+    <div class="traffic__sidebar">
+      <light-sidebar />
+    </div>
+    <main>
+      <div class="traffic__bar">
+        <button [disabled]="!trafficService.trafficLights().length"
+                type="button"
+                class="btn"
+                (click)="removeLight()"
+        >
+          Remove light
+        </button>
+      </div>
+      @if (trafficService.trafficLights().length) {
+        <div class="traffic__item">
+          @if (trafficService.currentTraffic(); as currentTraffic) {
+            <h1 class="traffic__name">{{ currentTraffic.name }}</h1>
+            <h3>
+              <span>Color:</span>
+              <span [style.color]="currentTraffic.color">
+                {{ currentTraffic.color }}
+              </span>
+            </h3>
+            <h3>Change color:</h3>
+            <div class="traffic__colors">
+              @for (color of trafficService.trafficColors; track color) {
+                @if (color !== currentTraffic.color) {
+                  <button [style.background-color]="color"
+                          type="button"
+                          class="traffic__color"
+                          (click)="changeColor(color, currentTraffic)"
+                  ></button>
+                }
+              }
+            </div>
+          } @else {
+            <h3>No selected light</h3>
+          }
+        </div>
+      } @else {
+        <h3>No lights configured!</h3>
+      }
+    </main>
+  </div>
+</section>

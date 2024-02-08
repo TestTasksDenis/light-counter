@@ -1,0 +1,15 @@
+<aside class="sidebar">
+  <button type="button" class="btn" (click)="addLight()">Add light</button>
+  <div class="sidebar__lights">
+    @for (trafficLight of trafficService.trafficLights(); track trafficLight.name; let index = $index) {
+      <button [class.sidebar__light--active]="activeIndex === index"
+              type="button"
+              class="sidebar__light"
+              (click)="setCurrentLight(trafficLight, index)"
+      >
+        <strong>{{ index + 1 }}: </strong><span>{{ trafficLight.name }}</span>
+        <p [style.color]="trafficLight.color">{{ trafficLight.color }}</p>
+      </button>
+    }
+  </div>
+</aside>
